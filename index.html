@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todosApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/model/task.js"></script>
+    <script src="app/model/tasks.js"></script>
+    <script src="app/todosCtrl.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container" ng-controller="todosCtrl">
+        <div class="jumbotron ">
+            <div class="text-center">
+                <h1>My To DO list</h1>
+                <form ng-submit="funcadd()">
+                    <input type="text" ng-model="name" placeholder="Write a new Task">
+                </form>
+            </div>
+
+            <div class="column well list-unstyled tasks">
+                    <div ng-mouseover="task.show=true" ng-mouseleave="task.show=false" ng-repeat="task in tasks | filter : filterComplete " ng-class="{taskselected:task.accomplished}">
+                            
+                        <input  type="checkbox" ng-model="task.accomplished" ng-click="mycounter(task)">
+                        <button ng-click="deletetask(task)" ng-show="task.show"><i  class="material-icons">delete</i></button>
+                        {{task.name}}
+                    </div>
+            </div>
+        </div>
+        <div>
+            {{counter}} items left
+                <button type="button" class="btn btn-default" ng-click="selecttask = 'complete'">completed</button>
+                <button type="button" class="btn btn-default" ng-click="selecttask = 'open'">open</button>
+                <button type="button" class="btn btn-default" ng-click="selecttask = ''">all</button>
+            </div>
+    </div>
+</body>
+
+</html>
